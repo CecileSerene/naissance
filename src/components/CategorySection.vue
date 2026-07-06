@@ -85,7 +85,7 @@ const config = computed(() => getCategoryConfig(props.name))
 
 .category-section__grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.25rem;
 }
 

@@ -46,7 +46,7 @@ const showParticipations = computed(
 
     <div class="gift-card__body">
       <h3 class="gift-card__name">{{ gift.name }}</h3>
-      <p class="gift-card__price">{{ gift.price }} €</p>
+      <p v-if="gift.price" class="gift-card__price">{{ gift.price }} €</p>
       <p v-if="gift.source" class="gift-card__source">{{ gift.source }}</p>
 
       <div v-if="showProgress" class="gift-card__progress">
@@ -61,35 +61,37 @@ const showParticipations = computed(
         </p>
       </div>
 
-      <p v-if="fullyPaid && contributorsText" class="gift-card__contributors">
-        {{ COPY.gifts.participations }} {{ contributorsText }}
-      </p>
-      <p v-else-if="showReserved" class="gift-card__contributors">
-        {{ COPY.gifts.reservedBy }} {{ contributorsText }}
-      </p>
-      <p v-else-if="showParticipations" class="gift-card__contributors">
-        {{ COPY.gifts.participations }} {{ contributorsText }}
-      </p>
+      <div class="gift-card__footer">
+        <p v-if="fullyPaid && contributorsText" class="gift-card__contributors">
+          {{ COPY.gifts.participations }} {{ contributorsText }}
+        </p>
+        <p v-else-if="showReserved" class="gift-card__contributors">
+          {{ COPY.gifts.reservedBy }} {{ contributorsText }}
+        </p>
+        <p v-else-if="showParticipations" class="gift-card__contributors">
+          {{ COPY.gifts.participations }} {{ contributorsText }}
+        </p>
 
-      <div class="gift-card__actions">
-        <template v-if="fullyPaid">
-          <button type="button" class="gift-card__btn gift-card__btn--disabled" disabled>
-            {{ COPY.gifts.offeredFull }}
-          </button>
-        </template>
-        <template v-else-if="gift.allowPartial">
-          <button type="button" class="gift-card__btn gift-card__btn--primary">
-            {{ COPY.gifts.offerFull }}
-          </button>
-          <button type="button" class="gift-card__btn gift-card__btn--secondary">
-            {{ COPY.gifts.participate }}
-          </button>
-        </template>
-        <template v-else>
-          <button type="button" class="gift-card__btn gift-card__btn--primary gift-card__btn--full">
-            {{ COPY.gifts.offerFull }}
-          </button>
-        </template>
+        <div class="gift-card__actions">
+          <template v-if="fullyPaid">
+            <button type="button" class="gift-card__btn gift-card__btn--disabled"  disabled>
+              {{ COPY.gifts.offeredFull }}
+            </button>
+          </template>
+          <template v-else-if="gift.allowPartial">
+            <button type="button" class="gift-card__btn gift-card__btn--primary" :style="{ backgroundColor: categoryColor }">
+              {{ COPY.gifts.offerFull }}
+            </button>
+            <button type="button" class="gift-card__btn gift-card__btn--secondary"  :style="{ color: categoryColor, borderColor: categoryColor }">
+              {{ COPY.gifts.participate }}
+            </button>
+          </template>
+          <template v-else>
+            <button type="button" class="gift-card__btn gift-card__btn--primary gift-card__btn--full" :style="{ backgroundColor: categoryColor }">
+              {{ COPY.gifts.offerFull }}
+            </button>
+          </template>
+        </div>
       </div>
     </div>
   </article>
@@ -201,6 +203,10 @@ const showParticipations = computed(
   margin: 0.375rem 0 0;
 }
 
+.gift-card__footer {
+  margin-top: auto;
+}
+
 .gift-card__contributors {
   font-size: 0.8125rem;
   color: var(--color-text-muted);
@@ -212,7 +218,6 @@ const showParticipations = computed(
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-top: auto;
   padding-top: 1rem;
 }
 
@@ -248,9 +253,8 @@ const showParticipations = computed(
 }
 
 .gift-card__btn--primary {
-  background: var(--color-primary);
   color: white;
-  border: 2px solid var(--color-primary);
+  border: none;
 }
 
 .gift-card__btn--secondary {

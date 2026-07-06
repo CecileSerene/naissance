@@ -8,7 +8,7 @@ import { COPY } from '../constants/copy.js'
       <img src="./icons/Whales.png">
     </div>
     <h1 class="app-header__title">{{ COPY.header.title }}</h1>
-    <p class="app-header__intro">{{ COPY.header.intro }}</p>
+    <p class="app-header__intro" v-html="COPY.header.intro"></p>
   </header>
 </template>
 

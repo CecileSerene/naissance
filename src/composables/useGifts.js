@@ -2,7 +2,7 @@ import { computed } from 'vue'
 import { CATEGORY_ORDER } from '../constants/categories.js'
 
 export function isFullyPaid(gift) {
-  return gift.paid >= gift.price
+  return gift.isPaid
 }
 
 export function progressPercent(gift) {

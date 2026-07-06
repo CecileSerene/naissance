@@ -27,7 +27,7 @@ import { COPY } from '../constants/copy.js'
         </div>
         <div>
           <h3 class="participation-banner__option-title">{{ COPY.banner.postal.title }}</h3>
-          <p class="participation-banner__option-text">{{ COPY.banner.postal.description }}</p>
+          <p class="participation-banner__option-text" v-html="COPY.banner.postal.description"></p>
         </div>
       </div>
       <div class="participation-banner__separator"></div>

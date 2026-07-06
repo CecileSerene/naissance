@@ -2,7 +2,7 @@ export const COPY = {
   header: {
     title: 'Merci pour votre amour et votre générosité ♡',
     intro:
-      'Nous sommes tellement heureux de préparer l\'arrivée de bébé. Vous pouvez participer à notre liste de naissance de la manière qui vous convient le mieux.',
+      'Nous sommes tellement heureux de préparer l\'arrivée de bébé. Vous pouvez participer à notre liste de naissance de la manière qui vous convient le mieux.<br>Cécile et Alexandre',
   },
   banner: {
     title: 'Trois façons simples de participer',
@@ -12,7 +12,7 @@ export const COPY = {
     },
     postal: {
       title: 'Par envoi postal',
-      description: 'Choisissez un cadeau sur la liste et faites-le nous parvenir. /n <br>Livraisons uniquement à partir de Septembre </br>',
+      description: 'Choisissez un cadeau sur la liste et faites-le nous parvenir.<br><span style="color:#e76f51">Livraisons uniquement à partir de Septembre, autrement nous ne serons pas là pour les recevoir</span>',
     },
     hand: {
       title: 'En main propre',
