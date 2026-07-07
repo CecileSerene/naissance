@@ -21,6 +21,7 @@ const showReserved = computed(
 const showParticipations = computed(
   () => !fullyPaid.value && props.gift.allowPartial && props.gift.contributors.length > 0
 )
+const url = props.gift.source ? new URL(props.gift.source).hostname : null
 </script>
 
 <template>
@@ -47,7 +48,7 @@ const showParticipations = computed(
     <div class="gift-card__body">
       <h3 class="gift-card__name">{{ gift.name }}</h3>
       <p v-if="gift.price" class="gift-card__price">{{ gift.price }} €</p>
-      <p v-if="gift.source" class="gift-card__source">{{ gift.source }}</p>
+      <p v-if="gift.source" class="gift-card__source">{{ url }}</p>
 
       <div v-if="showProgress" class="gift-card__progress">
         <div class="gift-card__progress-bar">

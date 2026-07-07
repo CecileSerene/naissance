@@ -99,7 +99,7 @@ import { COPY } from '../constants/copy.js'
 }
 
 .participation-banner__icon--hands {
-  background: #e76f51;
+  background: #64113f;
 }
 
 .participation-banner__icon--postal {

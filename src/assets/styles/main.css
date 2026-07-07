@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700&display=swap');
-
 :root {
   --color-primary: #3D5A44;
   --color-bg: #FAF8F5;
@@ -27,6 +25,24 @@
   }
 }
 
+/* Alias vers les anciens noms de variables utilisés par les composants
+   GiftHeader / GiftImage / GiftInfo / GiftDescription / ContributionForm /
+   PaymentNotice, pour ne pas avoir à réécrire chaque fichier. */
+:root {
+  --bg-cream: var(--color-bg);
+  --card-bg: var(--color-surface);
+  --text-dark: var(--color-text);
+  --text-muted: var(--color-text-muted);
+  --green-primary: var(--color-primary);
+  --green-dark: #2c4536;
+  --green-badge-bg: var(--color-badge-green);
+  --green-badge-text: var(--color-primary);
+  --border-light: var(--color-border);
+  --radius: var(--radius-lg);
+  --font-display: var(--font-serif);
+  --font-body: var(--font-sans);
+}
+
 *,
 *::before,
 *::after {
@@ -35,6 +51,8 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  background: var(--color-bg);
+  scrollbar-gutter: stable;
 }
 
 body {

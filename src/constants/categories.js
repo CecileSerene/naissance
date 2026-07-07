@@ -1,9 +1,9 @@
 export const CATEGORY_CONFIG = {
   Chambre: { icon: 'bed', color: '#264653' },
   Jouets: { icon: 'toy', color: '#2a9d8f' },
-  Transport: { icon: 'stroller', color: '#f4a261' },
-  Maison: { icon: 'house', color: '#e76f51' },
-  Autre: { icon: 'gift', color: '#e76f51' },
+  Transport: { icon: 'stroller', color: '#64113f' },
+  Maison: { icon: 'house', color: '#ef6f6c' },
+  Autre: { icon: 'gift', color: '#ef6f6c' },
 }
 
 export const DEFAULT_CATEGORY = { icon: 'gift', color: '#6B7280' }
