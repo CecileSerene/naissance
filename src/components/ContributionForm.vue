@@ -72,16 +72,16 @@ function handleSubmit() {
         id="contributor-name"
         type="text"
         v-model="contributorName"
-        placeholder="Votre prénom"
+        placeholder="Votre nom"
         :class="{ 'has-error': nameError }"
       />
 
       <div class="checkbox-row">
         <input type="checkbox" id="displayName" v-model="displayName" />
-        <label for="displayName" class="checkbox-label">Afficher mon nom</label>
+        <label for="displayName" class="checkbox-label">Afficher mon nom (visible par les autres invités)</label>
       </div>
 
-      <p v-if="nameError" class="error-note">Merci d'indiquer votre prénom.</p>
+      <p v-if="nameError" class="error-note">Merci d'indiquer votre nom.</p>
     </div>
 
     <div class="field">

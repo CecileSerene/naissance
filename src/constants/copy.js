@@ -13,6 +13,7 @@ export const COPY = {
     postal: {
       title: 'Par envoi postal',
       description: 'Choisissez un cadeau sur la liste et faites-le nous parvenir.<br><span style="color:#e76f51">Livraisons uniquement à partir de Septembre, autrement nous ne serons pas là pour les recevoir</span>',
+      address: 'Cécile et Alexandre POIRRIER<br>19 avenue Louis Barthou<br>35000 Rennes<br>Tél. : 0666024819'
     },
     hand: {
       title: 'En main propre',

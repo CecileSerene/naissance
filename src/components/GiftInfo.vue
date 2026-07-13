@@ -57,7 +57,7 @@ const formatEuro = (value) =>
     <template v-if="hasPrice" :style="{ margin: '8px' }">
       <template v-if="!gift.isPaid && gift.allowPartial">
         <div class="progress-row">
-          <span>Payé à {{ percent }}%</span>
+          <span></span>
           <span>{{ formatEuro(gift.paid) }} sur {{ formatEuro(gift.price) }}</span>
         </div>
         <div class="progress-track">

@@ -1,8 +1,27 @@
 <script setup>
+import { ref } from 'vue'
 import BankIcon from './icons/BankIcon.vue'
 import BoxIcon from './icons/BoxIcon.vue'
 import HandsIcon from './icons/HandsIcon.vue'
 import { COPY } from '../constants/copy.js'
+
+const props = defineProps({
+  showDetails: { type: Boolean, default: false }
+})
+
+const copiedField = ref(null)
+
+async function copyToClipboard(text, field) {
+  try {
+    await navigator.clipboard.writeText(text)
+    copiedField.value = field
+    setTimeout(() => {
+      if (copiedField.value === field) copiedField.value = null
+    }, 2000)
+  } catch (err) {
+    console.error('Copie impossible :', err)
+  }
+}
 </script>
 
 <template>
@@ -20,7 +39,9 @@ import { COPY } from '../constants/copy.js'
           <p class="participation-banner__option-text">{{ COPY.banner.hand.description }}</p>
         </div>
       </div>
+
       <div class="participation-banner__separator"></div>
+
       <div class="participation-banner__option">
         <div class="participation-banner__icon participation-banner__icon--postal">
           <BoxIcon />
@@ -28,9 +49,15 @@ import { COPY } from '../constants/copy.js'
         <div>
           <h3 class="participation-banner__option-title">{{ COPY.banner.postal.title }}</h3>
           <p class="participation-banner__option-text" v-html="COPY.banner.postal.description"></p>
+
+          <div v-if="showDetails" class="participation-banner__details">
+            <p class="participation-banner__detail-line" v-html="COPY.banner.postal.address"></p>
+          </div>
         </div>
       </div>
+
       <div class="participation-banner__separator"></div>
+
       <div class="participation-banner__option">
         <div class="participation-banner__icon participation-banner__icon--bank">
           <BankIcon />
@@ -38,6 +65,26 @@ import { COPY } from '../constants/copy.js'
         <div>
           <h3 class="participation-banner__option-title">{{ COPY.banner.bank.title }}</h3>
           <p class="participation-banner__option-text">{{ COPY.banner.bank.description }}</p>
+
+          <div v-if="showDetails" class="participation-banner__details">
+            <p class="participation-banner__detail-line"><strong>IBAN :</strong> {{ COPY.banner.bank.iban }}</p>
+            <p class="participation-banner__detail-line"><strong>BIC :</strong> {{ COPY.banner.bank.bic }}</p>
+
+            <button
+              type="button"
+              class="participation-banner__copy-btn"
+              @click="copyToClipboard(`IBAN: ${COPY.banner.bank.iban} / BIC: ${COPY.banner.bank.bic}`, 'rib')"
+            >
+              <svg v-if="copiedField !== 'rib'" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" />
+                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+              </svg>
+              <svg v-else width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {{ copiedField === 'rib' ? 'Copié !' : 'Copier le RIB' }}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -51,6 +98,7 @@ import { COPY } from '../constants/copy.js'
   box-shadow: var(--shadow-card);
   padding: 1.5rem;
   margin-bottom: 2.5rem;
+  text-align: left;
 }
 
 .participation-banner__title {
