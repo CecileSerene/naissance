@@ -67,9 +67,11 @@ async function copyToClipboard(text, field) {
           <p class="participation-banner__option-text">{{ COPY.banner.bank.description }}</p>
 
           <div v-if="showDetails" class="participation-banner__details">
-            <p class="participation-banner__detail-line"><strong>Nom :</strong> {{ COPY.banner.bank.name }}</p>
-            <p class="participation-banner__detail-line"><strong>IBAN :</strong> {{ COPY.banner.bank.iban }}</p>
-            <p class="participation-banner__detail-line"><strong>BIC :</strong> {{ COPY.banner.bank.bic }}</p>
+            <span class="participation-banner__detail-line"><strong>Nom :</strong> {{ COPY.banner.bank.name }}</span>
+            <br>
+            <span class="participation-banner__detail-line"><strong>IBAN :</strong> {{ COPY.banner.bank.iban }}</span>
+            <br>
+            <span class="participation-banner__detail-line"><strong>BIC :</strong> {{ COPY.banner.bank.bic }}</span>
 
             <button
               type="button"
@@ -184,6 +186,11 @@ async function copyToClipboard(text, field) {
 
 .participation-banner__copy-btn svg {
   flex-shrink: 0;
+}
+
+.participation-banner__details {
+  font-size: 0.9375rem;
+  margin-top: 0.5rem;
 }
 
 .participation-banner__copy-btn--copied {
