@@ -74,6 +74,7 @@ async function copyToClipboard(text, field) {
             <button
               type="button"
               class="participation-banner__copy-btn"
+              :class="{ 'participation-banner__copy-btn--copied': copiedField === 'rib' }"
               @click="copyToClipboard(COPY.banner.bank.iban.replaceAll(' ',''), 'rib')"
             >
               <svg v-if="copiedField !== 'rib'" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -153,6 +154,41 @@ async function copyToClipboard(text, field) {
 
 .participation-banner__icon--postal {
   background: #2a9d8f;
+}
+
+.participation-banner__copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 8%, white);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 25%, white);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.participation-banner__copy-btn:hover {
+  background: color-mix(in srgb, var(--color-primary) 15%, white);
+  border-color: color-mix(in srgb, var(--color-primary) 40%, white);
+}
+
+.participation-banner__copy-btn:active {
+  transform: scale(0.97);
+}
+
+.participation-banner__copy-btn svg {
+  flex-shrink: 0;
+}
+
+.participation-banner__copy-btn--copied {
+  color: #1f7a4d;
+  background: color-mix(in srgb, #1f7a4d 12%, white);
+  border-color: color-mix(in srgb, #1f7a4d 35%, white);
 }
 
 .participation-banner__option-title {

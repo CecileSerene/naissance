@@ -5,6 +5,12 @@ import ParticipationBanner from '../components/ParticipationBanner.vue'
 
 <template>
   <div class="thanks">
+    <div class="thanks-header">
+      <div></div>
+      <div class="mascot" aria-hidden="true">
+        <img src="../components/icons/Whales.png" alt="" width="100" />
+      </div>
+    </div>
     <h1>Merci pour votre participation !</h1>
     <p>Votre geste nous touche énormément.<br>Grâce à votre générosité, nous préparons l'arrivée de bébé avec encore plus de sérénité.</p>
     <p>Vous pouvez maintenant nous le faire parvenir de la manière de votre choix.</p>
@@ -16,8 +22,19 @@ import ParticipationBanner from '../components/ParticipationBanner.vue'
 <style scoped>
 .thanks {
   max-width: var(--container-max);
-  margin: 100px auto;
+  margin: 40px auto;
   text-align: center;
+}
+
+.thanks-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.thanks-header .mascot {
+  display: flex;
 }
 
 .thanks h1 {

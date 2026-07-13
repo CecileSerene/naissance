@@ -6,7 +6,6 @@ const props = defineProps({
   gift: { type: Object, required: true },
   remaining: { type: Number, default: 0 },
   minAmount: { type: Number, default: 10 },
-  categoryColor: { type: String, default: '#3D5A44' },
 })
 
 const emit = defineEmits(['submit'])
@@ -150,7 +149,7 @@ function handleSubmit() {
       <p class="char-count">{{ message.length }} / 200</p>
     </div>
 
-    <button type="button" class="submit-btn" :style="{ backgroundColor: categoryColor }" @click="handleSubmit">Continuer ma participation</button>
+    <button type="button" class="submit-btn" @click="handleSubmit">Continuer ma participation</button>
   </section>
 </template>
 

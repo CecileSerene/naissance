@@ -1,5 +1,5 @@
 :root {
-  --color-primary: #3D5A44;
+  --color-primary: #264653;
   --color-bg: #FAF8F5;
   --color-bg-muted: #EDEAE5;
   --color-surface: #FFFFFF;
@@ -34,7 +34,7 @@
   --text-dark: var(--color-text);
   --text-muted: var(--color-text-muted);
   --green-primary: var(--color-primary);
-  --green-dark: #2c4536;
+  --green-dark: #1b333c;
   --green-badge-bg: var(--color-badge-green);
   --green-badge-text: var(--color-primary);
   --border-light: var(--color-border);
