@@ -6,7 +6,7 @@ const props = defineProps({
   categoryColor: { type: String, default: '#3D5A44' },
 })
 
-const hasPrice = computed(() => props.gift.price !== null && props.gift.price !== undefined)
+const hasPrice = computed(() => props.gift.price !== null && props.gift.price !== undefined && props.gift.price > 0)
 
 const percent = computed(() => {
   if (!hasPrice.value || props.gift.price === 0) return 0

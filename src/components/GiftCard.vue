@@ -30,7 +30,7 @@ const url = props.gift.source ? new URL(props.gift.source).hostname : null
     :class="{ 'gift-card--completed': fullyPaid }"
   >
     <div class="gift-card__image-wrap">
-      <a href="gift.source" target="_blank" rel="noopener" v-if="gift.source">
+      <a :href="gift.source" target="_blank" rel="noopener" v-if="gift.source && !fullyPaid">
         <img
           class="gift-card__image"
           :src="gift.image"
@@ -192,6 +192,7 @@ const url = props.gift.source ? new URL(props.gift.source).hostname : null
   font-size: 0.75rem;
   color: var(--color-text-muted);
   margin: 0.125rem 0 0;
+  text-decoration: auto;
 }
 
 .gift-card__progress {
