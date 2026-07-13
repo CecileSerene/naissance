@@ -33,7 +33,7 @@ export const gifts = [
     "description": "Un lit de petit mais pas tout-petit non plus...",
     "source": "https://www.ikea.com/fr/fr/p/sundvik-lit-bebe-blanc-00248567/",
     "allowPartial": false,
-    "contributors": []
+    "contributors": ["Papa et Maman"]
   },
   {
     "id": "berceau-cododo-next2me-essential-gris-chicco-aubert",

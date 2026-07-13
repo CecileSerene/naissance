@@ -67,13 +67,14 @@ async function copyToClipboard(text, field) {
           <p class="participation-banner__option-text">{{ COPY.banner.bank.description }}</p>
 
           <div v-if="showDetails" class="participation-banner__details">
+            <p class="participation-banner__detail-line"><strong>Nom :</strong> {{ COPY.banner.bank.name }}</p>
             <p class="participation-banner__detail-line"><strong>IBAN :</strong> {{ COPY.banner.bank.iban }}</p>
             <p class="participation-banner__detail-line"><strong>BIC :</strong> {{ COPY.banner.bank.bic }}</p>
 
             <button
               type="button"
               class="participation-banner__copy-btn"
-              @click="copyToClipboard(`IBAN: ${COPY.banner.bank.iban} / BIC: ${COPY.banner.bank.bic}`, 'rib')"
+              @click="copyToClipboard(COPY.banner.bank.iban.replaceAll(' ',''), 'rib')"
             >
               <svg v-if="copiedField !== 'rib'" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="9" y="9" width="13" height="13" rx="2" />

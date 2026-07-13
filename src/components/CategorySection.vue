@@ -31,13 +31,12 @@ const config = computed(() => getCategoryConfig(props.name))
       </div>
     </header>
     <div class="category-section__grid">
-      <RouterLink v-for="gift in gifts" :to="`/gift/${gift.id}`" class="gift-card">
       <GiftCard
+        v-for="gift in gifts"
         :key="gift.id"
         :gift="gift"
         :category-color="config.color"
       />
-      </RouterLink>
     </div>
   </section>
 </template>

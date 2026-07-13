@@ -6,7 +6,7 @@ import ParticipationBanner from '../components/ParticipationBanner.vue'
 <template>
   <div class="thanks">
     <h1>Merci pour votre participation !</h1>
-    <p>Nous apprécions enormément votre geste généreux !</p>
+    <p>Votre geste nous touche énormément.<br>Grâce à votre générosité, nous préparons l'arrivée de bébé avec encore plus de sérénité.</p>
     <p>Vous pouvez maintenant nous le faire parvenir de la manière de votre choix.</p>
     <ParticipationBanner :show-details="true" />
     <RouterLink to="/" class="back-link">Retour à la liste</RouterLink>

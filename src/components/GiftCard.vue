@@ -30,11 +30,22 @@ const url = props.gift.source ? new URL(props.gift.source).hostname : null
     :class="{ 'gift-card--completed': fullyPaid }"
   >
     <div class="gift-card__image-wrap">
+      <a href="gift.source" target="_blank" rel="noopener" v-if="gift.source">
+        <img
+          class="gift-card__image"
+          :src="gift.image"
+          :alt="gift.name"
+          loading="lazy"
+
+        />
+      </a>
       <img
-        class="gift-card__image"
-        :src="gift.image"
-        :alt="gift.name"
-        loading="lazy"
+          v-else
+          class="gift-card__image"
+          :src="gift.image"
+          :alt="gift.name"
+          loading="lazy"
+
       />
       <span
         v-if="!fullyPaid && gift.allowPartial"
@@ -47,8 +58,10 @@ const url = props.gift.source ? new URL(props.gift.source).hostname : null
 
     <div class="gift-card__body">
       <h3 class="gift-card__name">{{ gift.name }}</h3>
-      <p v-if="gift.price" class="gift-card__price">{{ gift.price }} €</p>
-      <p v-if="gift.source" class="gift-card__source">{{ url }}</p>
+      <p v-if="gift.price && !fullyPaid" class="gift-card__price">{{ gift.price }} €</p>
+      <a v-if="gift.source" class="gift-card__source" :href="gift.source" target="_blank" rel="noopener noreferrer">
+        {{ url }}
+      </a>
 
       <div v-if="showProgress" class="gift-card__progress">
         <div class="gift-card__progress-bar">
@@ -80,17 +93,17 @@ const url = props.gift.source ? new URL(props.gift.source).hostname : null
             </button>
           </template>
           <template v-else-if="gift.allowPartial">
-            <button type="button" class="gift-card__btn gift-card__btn--primary" :style="{ backgroundColor: categoryColor }">
+            <RouterLink :to="`/gift/${gift.id}?full=true`" class="gift-card__btn gift-card__btn--primary" :style="{ backgroundColor: categoryColor }">
               {{ COPY.gifts.offerFull }}
-            </button>
-            <button type="button" class="gift-card__btn gift-card__btn--secondary"  :style="{ color: categoryColor, borderColor: categoryColor }">
+            </RouterLink>
+            <RouterLink :to="`/gift/${gift.id}`" class="gift-card__btn gift-card__btn--secondary" :style="{ color: categoryColor, borderColor: categoryColor }">
               {{ COPY.gifts.participate }}
-            </button>
+            </RouterLink>
           </template>
           <template v-else>
-            <button type="button" class="gift-card__btn gift-card__btn--primary gift-card__btn--full" :style="{ backgroundColor: categoryColor }">
+            <RouterLink :to="`/gift/${gift.id}`" class="gift-card__btn gift-card__btn--primary gift-card__btn--full" :style="{ backgroundColor: categoryColor }">
               {{ COPY.gifts.offerFull }}
-            </button>
+            </RouterLink>
           </template>
         </div>
       </div>
@@ -246,6 +259,7 @@ const url = props.gift.source ? new URL(props.gift.source).hostname : null
   gap: 0.375rem;
   flex: 1;
   transition: background 0.15s, border-color 0.15s;
+  text-decoration: auto;
 }
 
 .gift-card__btn :deep(svg) {

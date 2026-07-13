@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 const props = defineProps({
   gift: { type: Object, required: true },
@@ -10,13 +11,16 @@ const props = defineProps({
 
 const emit = defineEmits(['submit'])
 
+const route = useRoute()
+const isFull = route.query.full === 'true'
+
 const hasPrice = computed(() => props.gift.price !== null && props.gift.price !== undefined)
 
 // The full/partial toggle only makes sense when there is a fixed price
 // AND the gift owner allows splitting the cost between several people.
 const showModeToggle = computed(() => hasPrice.value && props.gift.allowPartial)
 
-const mode = ref(showModeToggle.value ? 'partial' : 'full')
+const mode = ref(isFull ? 'full' : 'partial')
 const amount = ref(hasPrice.value && !props.gift.allowPartial ? props.remaining : props.minAmount)
 const message = ref('')
 const contributorName = ref('')
@@ -55,7 +59,7 @@ function handleSubmit() {
 <template>
   <section class="contribution-card">
     <h2>Participer à ce cadeau</h2>
-    <p>Indiquez aux autres invités votre reservation ou participation et ainsi éviter les doublons.</p>
+    <p>Indiquez aux autres invités votre réservation ou participation et ainsi éviter les doublons.</p>
 
     <p class="hint" v-if="allowPartial">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -97,19 +101,19 @@ function handleSubmit() {
     </div>
 
     <div v-if="showModeToggle" class="mode-choice">
-      <label class="mode-option" :class="{ active: mode === 'partial' }">
-        <input type="radio" value="partial" v-model="mode" name="mode" />
-        <span>
-          <strong>Participation partielle</strong>
-          <small>Je participe du montant de mon choix</small>
-        </span>
-      </label>
-
       <label class="mode-option" :class="{ active: mode === 'full' }">
         <input type="radio" value="full" v-model="mode" name="mode" />
         <span>
           <strong>Offrir en entier</strong>
           <small>Je réserve ce cadeau en totalité</small>
+        </span>
+      </label>
+
+      <label class="mode-option" :class="{ active: mode === 'partial' }">
+        <input type="radio" value="partial" v-model="mode" name="mode" />
+        <span>
+          <strong>Participation partielle</strong>
+          <small>Je participe du montant de mon choix</small>
         </span>
       </label>
     </div>

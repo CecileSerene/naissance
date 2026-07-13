@@ -41,7 +41,7 @@ import { COPY } from '../constants/copy.js'
   font-size: 1rem;
   line-height: 1.6;
   color: var(--color-text-muted);
-  max-width: 36rem;
+  max-width: 40rem;
   margin: 0 auto;
 }
 
