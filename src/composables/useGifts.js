@@ -23,7 +23,7 @@ export function useGifts(gifts) {
   const groupedCategories = computed(() => {
     const groups = new Map()
 
-    for (const gift of gifts) {
+    for (const gift of gifts.value) {
       if (!groups.has(gift.category)) {
         groups.set(gift.category, [])
       }

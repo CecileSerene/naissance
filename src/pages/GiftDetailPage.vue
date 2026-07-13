@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import GiftDetailContent from '../components/GiftDetailContent.vue'
-import { getGiftById } from '../data/gifts'
+import { useGiftDetail } from '../composables/useGiftDetail.js'
 import { getCategoryConfig } from '../constants/categories.js'
 
 // Because the route is declared with `props: true`, vue-router passes
@@ -12,26 +12,34 @@ const props = defineProps({
 })
 
 const router = useRouter()
-
-const gift = computed(() => getGiftById(props.id))
-const categoryColor = computed(() => getCategoryConfig(gift.value.category)?.color)
+const { gift, loading, error } = useGiftDetail(props.id)
+const categoryColor = computed(() => gift.value ? getCategoryConfig(gift.value.category)?.color : null)
 
 function handleBack() {
   router.push('/')
 }
 
 function handleSubmit(payload) {
-  // Wire this up to your API call when it's ready.
   console.log('Contribution soumise :', payload)
   router.push('/thanks')
 }
 </script>
 
 <template>
-  <GiftDetailContent v-if="gift" :gift="gift" :categoryColor="categoryColor" @back="handleBack" @submit="handleSubmit" />
-  <div v-else class="not-found">
-    <p>Ce cadeau est introuvable.</p>
-    <button type="button" @click="handleBack">Retour à la liste</button>
+  <div>
+    <div v-if="loading" class="loading">Chargement du cadeau…</div>
+    <div v-else-if="error" class="error">Une erreur est survenue lors du chargement du cadeau.</div>
+    <GiftDetailContent
+      v-else-if="gift"
+      :gift="gift"
+      :categoryColor="categoryColor"
+      @back="handleBack"
+      @submit="handleSubmit"
+    />
+    <div v-else class="not-found">
+      <p>Ce cadeau est introuvable.</p>
+      <button type="button" @click="handleBack">Retour à la liste</button>
+    </div>
   </div>
 </template>
 
