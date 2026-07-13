@@ -47,13 +47,6 @@ const url = props.gift.source ? new URL(props.gift.source).hostname : null
           loading="lazy"
 
       />
-      <span
-        v-if="!fullyPaid && gift.allowPartial"
-        class="gift-card__badge"
-        :class="gift.allowPartial ? 'gift-card__badge--partial' : 'gift-card__badge--full'"
-      >
-        {{ COPY.gifts.badgePartial }}
-      </span>
     </div>
 
     <div class="gift-card__body">

@@ -125,7 +125,8 @@ async function copyToClipboard(text, field) {
 }
 
 .participation-banner__separator {
-  border-right: solid 1px var(--color-border);
+  border-bottom: solid 1px var(--color-border);
+  margin: 0 15px;
 }
 
 .participation-banner__icon {
@@ -213,6 +214,12 @@ async function copyToClipboard(text, field) {
 
   .participation-banner__option {
     flex: 1;
+  }
+
+  .participation-banner__separator {
+    border-bottom: none;
+    border-right: solid 1px var(--color-border);
+    margin: 0;
   }
 }
 </style>
