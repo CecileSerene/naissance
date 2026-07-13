@@ -1,9 +1,10 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import GiftDetailContent from '../components/GiftDetailContent.vue'
 import { useGiftDetail } from '../composables/useGiftDetail.js'
 import { getCategoryConfig } from '../constants/categories.js'
+import { submitContribution } from '../services/gifts.js'
 
 // Because the route is declared with `props: true`, vue-router passes
 // the :id param straight in as a prop instead of us reading useRoute().
@@ -15,13 +16,26 @@ const router = useRouter()
 const { gift, loading, error } = useGiftDetail(props.id)
 const categoryColor = computed(() => gift.value ? getCategoryConfig(gift.value.category)?.color : null)
 
+const submitting = ref(false)
+const submitError = ref(null)
+
 function handleBack() {
   router.push('/')
 }
 
-function handleSubmit(payload) {
-  console.log('Contribution soumise :', payload)
-  router.push('/thanks')
+async function handleSubmit(payload) {
+  submitting.value = true
+  submitError.value = null
+
+  try {
+    await submitContribution(payload)
+    router.push('/thanks')
+  } catch (err) {
+    submitError.value = err.message
+    console.error('Erreur lors de la soumission :', err)
+  } finally {
+    submitting.value = false
+  }
 }
 </script>
 
@@ -33,6 +47,8 @@ function handleSubmit(payload) {
       v-else-if="gift"
       :gift="gift"
       :categoryColor="categoryColor"
+      :submitting="submitting"
+      :submitError="submitError"
       @back="handleBack"
       @submit="handleSubmit"
     />

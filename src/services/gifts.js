@@ -1,5 +1,3 @@
-import { gifts as giftsMock, getGiftById as getGiftByIdMock } from '../data/gifts.js'
-
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 
 async function request(path, options = {}) {
@@ -23,15 +21,6 @@ async function request(path, options = {}) {
     throw new Error('No API base URL configured for write operations')
   }
 
-  if (path === '/gifts') {
-    return giftsMock
-  }
-
-  if (path.startsWith('/gifts/')) {
-    const id = decodeURIComponent(path.slice('/gifts/'.length))
-    return getGiftByIdMock(id)
-  }
-
   throw new Error('No API base URL configured for this request')
 }
 
@@ -43,9 +32,17 @@ export async function fetchGiftById(id) {
   return request(`/gifts/${encodeURIComponent(id)}`)
 }
 
-export async function submitContribution(id, contribution) {
-  return request(`/gifts/${encodeURIComponent(id)}/contributions`, {
+export async function submitContribution(contribution) {
+  return request(`/contributions`, {
     method: 'POST',
-    body: JSON.stringify(contribution),
+    body: JSON.stringify({
+        giftId: contribution.giftId,
+        contributorName: contribution.name,
+        contributionEmail: contribution.email,
+        contributionAmount: contribution.amount,
+        isVisible: contribution.displayName,
+        message: contribution.message,
+        amount: contribution.amount
+    }),
   })
 }

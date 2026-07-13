@@ -24,6 +24,7 @@ const mode = ref(isFull ? 'full' : 'partial')
 const amount = ref(hasPrice.value && !props.gift.allowPartial ? props.remaining : props.minAmount)
 const message = ref('')
 const contributorName = ref('')
+const contributorEmail = ref('')
 const displayName = ref(true)
 const nameError = ref(false)
 
@@ -49,9 +50,10 @@ function handleSubmit() {
 
   emit('submit', {
     name: contributorName.value.trim(),
-    mode: hasPrice.value ? mode.value : 'free',
     amount: amount.value,
-    message: message.value
+    message: message.value,
+    email: contributorEmail.value.trim(),
+    displayName: displayName.value,
   })
 }
 </script>
