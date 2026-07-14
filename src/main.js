@@ -6,7 +6,10 @@ import router from './router'
 
 createApp(App)
   .use(VueReCaptcha, {
-    siteKey: '6LcC31ItAAAAAPeDsdwHsU_MaJ63bx8zPAHHKvAi'
+    siteKey: '6LcC31ItAAAAAPeDsdwHsU_MaJ63bx8zPAHHKvAi',
+    loaderOptions: {
+      autoHideBadge: true,
+    }
   })
   .use(router)
   .mount('#app')
