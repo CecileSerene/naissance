@@ -31,6 +31,7 @@ async function handleSubmit(payload) {
   try {
     await recaptcha?.recaptchaLoaded()
     const token = await recaptcha?.executeRecaptcha('submit_form')
+    console.log('reCAPTCHA token:', token)
     await submitContribution(payload, token)
     router.push('/thanks')
   } catch (err) {
