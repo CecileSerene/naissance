@@ -2,7 +2,6 @@
 import { computed } from 'vue'
 import { isFullyPaid, progressPercent } from '../composables/useGifts.js'
 import { COPY } from '../constants/copy.js'
-import GiftIcon from './icons/GiftIcon.vue'
 
 const props = defineProps({
   gift: { type: Object, required: true },
