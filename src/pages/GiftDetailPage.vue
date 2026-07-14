@@ -1,6 +1,7 @@
 <script setup>
-import { computed, ref, inject } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useReCaptcha } from 'vue-recaptcha-v3'
 import GiftDetailContent from '../components/GiftDetailContent.vue'
 import { useGiftDetail } from '../composables/useGiftDetail.js'
 import { getCategoryConfig } from '../constants/categories.js'
@@ -13,7 +14,7 @@ const props = defineProps({
 })
 
 const router = useRouter()
-const recaptcha = inject('VueReCaptcha')
+const { executeRecaptcha, recaptchaLoaded } = useReCaptcha()
 const { gift, loading, error } = useGiftDetail(props.id)
 const categoryColor = computed(() => gift.value ? getCategoryConfig(gift.value.category)?.color : null)
 
@@ -29,8 +30,8 @@ async function handleSubmit(payload) {
   submitError.value = null
 
   try {
-    await recaptcha?.recaptchaLoaded()
-    const token = await recaptcha?.executeRecaptcha('submit_form')
+    await recaptchaLoaded()
+    const token = await executeRecaptcha('submit_form')
     await submitContribution(payload, token)
     router.push('/thanks')
   } catch (err) {
