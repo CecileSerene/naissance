@@ -33,7 +33,6 @@ export async function fetchGiftById(id) {
 }
 
 export async function submitContribution(contribution, recaptchaToken) {
-  console.log(recaptchaToken)
   return request(`/contributions`, {
     method: 'POST',
     body: JSON.stringify({
