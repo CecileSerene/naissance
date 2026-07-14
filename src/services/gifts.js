@@ -32,7 +32,7 @@ export async function fetchGiftById(id) {
   return request(`/gifts/${encodeURIComponent(id)}`)
 }
 
-export async function submitContribution(contribution) {
+export async function submitContribution(contribution, recaptchaToken) {
   return request(`/contributions`, {
     method: 'POST',
     body: JSON.stringify({
@@ -42,7 +42,8 @@ export async function submitContribution(contribution) {
         contributionAmount: contribution.amount,
         isVisible: contribution.displayName,
         message: contribution.message,
-        amount: contribution.amount
+        amount: contribution.amount,
+        recaptchaToken: recaptchaToken
     }),
   })
 }
