@@ -200,7 +200,7 @@ function handleSubmit() {
   margin: 0;
   flex-shrink: 0;
   cursor: pointer;
-  accent-color: #264653;
+  accent-color: #1b617c;
 }
 
 .field .checkbox-row label {
@@ -229,7 +229,7 @@ function handleSubmit() {
 }
 
 .mode-option.active {
-  border-color: #264653;
+  border-color: #1b617c;
   background: #cde3eb;
 }
 

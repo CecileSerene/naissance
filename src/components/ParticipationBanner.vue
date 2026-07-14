@@ -148,7 +148,7 @@ async function copyToClipboard(text, field) {
 }
 
 .participation-banner__icon--bank {
-  background: #264653;
+  background: #1b617c;
 }
 
 .participation-banner__icon--hands {

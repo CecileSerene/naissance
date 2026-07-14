@@ -1,5 +1,5 @@
 export const CATEGORY_CONFIG = {
-  Chambre: { icon: 'bed', color: '#264653' },
+  Chambre: { icon: 'bed', color: '#1b617c' },
   Jouets: { icon: 'toy', color: '#2a9d8f' },
   Transport: { icon: 'stroller', color: '#64113f' },
   Maison: { icon: 'house', color: '#ef6f6c' },
