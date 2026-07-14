@@ -38,7 +38,7 @@ export async function submitContribution(contribution, recaptchaToken) {
     body: JSON.stringify({
         giftId: contribution.giftId,
         contributorName: contribution.name,
-        contributionEmail: contribution.email,
+        contributorEmail: contribution.email,
         contributionAmount: contribution.amount,
         isVisible: contribution.displayName,
         message: contribution.message,
