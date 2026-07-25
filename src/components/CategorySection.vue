@@ -24,7 +24,7 @@ const config = computed(() => getCategoryConfig(props.name))
         <CategoryIcon :name="config.icon" />
       </div>
       <div class="category-section__titles">
-        <h2 class="category-section__name">{{ name }}</h2>
+        <h2 class="category-section__name">{{ config.name }}</h2>
         <p class="category-section__count">
           {{ COPY.gifts.availableCount(availableCount) }}
         </p>

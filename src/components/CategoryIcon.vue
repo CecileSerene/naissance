@@ -4,7 +4,8 @@ import BedIcon from './icons/BedIcon.vue'
 import ToyIcon from './icons/ToyIcon.vue'
 import StrollerIcon from './icons/StrollerIcon.vue'
 import GiftIcon from './icons/GiftIcon.vue'
-import HouseIcon from './icons/HouseIcon.vue'
+import BathIcon from './icons/BathIcon.vue'
+import LunchIcon from './icons/LunchIcon.vue'
 
 const props = defineProps({
   name: { type: String, required: true },
@@ -14,7 +15,8 @@ const iconMap = {
   bed: BedIcon,
   toy: ToyIcon,
   stroller: StrollerIcon,
-  house: HouseIcon,
+  bath: BathIcon,
+  lunch: LunchIcon,
   gift: GiftIcon,
 }
 
