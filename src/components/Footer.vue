@@ -10,6 +10,10 @@ import { COPY } from '../constants/copy.js'
     </div>
     <p class="app-footer__text">{{ COPY.footer.text }}</p>
     <p class="app-footer__signoff">{{ COPY.footer.signoff }}</p>
+
+    <div class="app-footer__contact">
+      <span class="app-footer__contact-line">Vous pouvez nous contacter par mail : poirriergontier@gmail.com</span>
+    </div>
   </footer>
 </template>
 
@@ -45,5 +49,19 @@ import { COPY } from '../constants/copy.js'
   font-style: italic;
   color: var(--color-text);
   margin: 0;
+}
+
+.app-footer__contact {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.app-footer__contact-line {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
 }
 </style>
