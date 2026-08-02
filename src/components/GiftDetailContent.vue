@@ -9,6 +9,7 @@ import PaymentNotice from './PaymentNotice.vue'
 const props = defineProps({
   gift: { type: Object, required: true },
   categoryColor: { type: String, default: '#3D5A44' },
+  isSubmitting: { type: Boolean, default: false },
 })
 
 const emit = defineEmits(['back', 'submit'])
@@ -36,9 +37,16 @@ function handleSubmit(payload) {
       <GiftInfo :gift="gift" :categoryColor="categoryColor" />
     </div>
 
-    <ContributionForm v-if="!gift.isPaid" :gift="gift" :categoryColor="categoryColor" :remaining="remaining" @submit="handleSubmit" />
+    <ContributionForm
+      v-if="!gift.isPaid"
+      :gift="gift"
+      :categoryColor="categoryColor"
+      :remaining="remaining"
+      :isSubmitting="isSubmitting"
+      @submit="handleSubmit"
+    />
 
-    <PaymentNotice v-if="!gift.isPaid"/>
+    <PaymentNotice v-if="!gift.isPaid" />
   </div>
 </template>
 

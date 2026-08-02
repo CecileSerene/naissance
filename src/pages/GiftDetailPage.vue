@@ -18,7 +18,7 @@ const { executeRecaptcha, recaptchaLoaded } = useReCaptcha()
 const { gift, loading, error } = useGiftDetail(props.id)
 const categoryColor = computed(() => gift.value ? getCategoryConfig(gift.value.category)?.color : null)
 
-const submitting = ref(false)
+const isSubmitting = ref(false)
 const submitError = ref(null)
 
 function handleBack() {
@@ -26,19 +26,19 @@ function handleBack() {
 }
 
 async function handleSubmit(payload) {
-  submitting.value = true
   submitError.value = null
 
   try {
     await recaptchaLoaded()
     const token = await executeRecaptcha('submit_form')
+    isSubmitting.value = true
     await submitContribution(payload, token)
     router.push('/thanks')
   } catch (err) {
     submitError.value = err.message
     console.error('Erreur lors de la soumission :', err)
   } finally {
-    submitting.value = false
+    isSubmitting.value = false
   }
 }
 </script>
@@ -51,7 +51,7 @@ async function handleSubmit(payload) {
       v-else-if="gift"
       :gift="gift"
       :categoryColor="categoryColor"
-      :submitting="submitting"
+      :isSubmitting="isSubmitting"
       :submitError="submitError"
       @back="handleBack"
       @submit="handleSubmit"

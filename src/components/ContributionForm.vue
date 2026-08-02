@@ -6,6 +6,7 @@ const props = defineProps({
   gift: { type: Object, required: true },
   remaining: { type: Number, default: 0 },
   minAmount: { type: Number, default: 10 },
+  isSubmitting: { type: Boolean, default: false },
 })
 
 const emit = defineEmits(['submit'])
@@ -42,6 +43,8 @@ watch(contributorName, () => {
 const isAmountEditable = computed(() => !hasPrice.value || mode.value === 'partial')
 
 function handleSubmit() {
+  if (props.isSubmitting) return // anti double-clic pendant l'envoi
+
   if (!contributorName.value.trim()) {
     nameError.value = true
     return
@@ -79,10 +82,11 @@ function handleSubmit() {
         v-model="contributorName"
         placeholder="Votre nom"
         :class="{ 'has-error': nameError }"
+        :disabled="isSubmitting"
       />
 
       <div class="checkbox-row">
-        <input type="checkbox" id="displayName" v-model="displayName" />
+        <input type="checkbox" id="displayName" v-model="displayName" :disabled="isSubmitting" />
         <label for="displayName" class="checkbox-label">Afficher mon nom (visible par les autres invités)</label>
       </div>
 
@@ -97,13 +101,14 @@ function handleSubmit() {
         v-model="contributorEmail"
         placeholder="email"
         :class="{ 'has-error': emailError }"
+        :disabled="isSubmitting"
       />
       <p v-if="emailError" class="error-note">Merci d'indiquer votre email.</p>
     </div>
 
     <div v-if="showModeToggle" class="mode-choice">
       <label class="mode-option" :class="{ active: mode === 'full' }">
-        <input type="radio" value="full" v-model="mode" name="mode" />
+        <input type="radio" value="full" v-model="mode" name="mode" :disabled="isSubmitting" />
         <span>
           <strong>Offrir en entier</strong>
           <small>Je réserve ce cadeau en totalité</small>
@@ -111,7 +116,7 @@ function handleSubmit() {
       </label>
 
       <label class="mode-option" :class="{ active: mode === 'partial' }">
-        <input type="radio" value="partial" v-model="mode" name="mode" />
+        <input type="radio" value="partial" v-model="mode" name="mode" :disabled="isSubmitting" />
         <span>
           <strong>Participation partielle</strong>
           <small>Je participe du montant de mon choix</small>
@@ -131,6 +136,7 @@ function handleSubmit() {
           :min="minAmount"
           :readonly="!isAmountEditable"
           :class="{ readonly: !isAmountEditable }"
+          :disabled="isSubmitting"
           @blur="amount = Math.round(amount)"
         />
         <span>€</span>
@@ -145,11 +151,14 @@ function handleSubmit() {
         maxlength="200"
         placeholder="Un petit mot pour les futurs parents..."
         rows="3"
+        :disabled="isSubmitting"
       />
       <p class="char-count">{{ message.length }} / 200</p>
     </div>
 
-    <button type="button" class="submit-btn" @click="handleSubmit">Continuer ma participation</button>
+    <button type="button" class="submit-btn" :disabled="isSubmitting" @click="handleSubmit">
+      {{ isSubmitting ? 'Envoi en cours…' : 'Continuer ma participation' }}
+    </button>
   </section>
 </template>
 
@@ -343,6 +352,11 @@ textarea {
 
 .submit-btn:hover {
   background: var(--green-dark);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .secure-note {
