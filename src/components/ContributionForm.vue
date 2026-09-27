@@ -21,7 +21,7 @@ const hasPrice = computed(() => props.gift.price !== null && props.gift.price !=
 const showModeToggle = computed(() => hasPrice.value && props.gift.allowPartial)
 
 const mode = ref(isFull ? 'full' : 'partial')
-const amount = ref(hasPrice.value && !props.gift.allowPartial ? props.remaining : props.minAmount)
+const amount = ref(hasPrice.value && ((props.gift.allowPartial && isFull) || !props.gift.allowPartial) ? props.remaining : props.minAmount)
 const message = ref('')
 const contributorName = ref('')
 const contributorEmail = ref('')
@@ -29,11 +29,13 @@ const displayName = ref(true)
 const nameError = ref(false)
 
 watch(mode, (newMode) => {
+  console.log(amount.value)
   if (newMode === 'full' && hasPrice.value) {
     amount.value = props.remaining
   } else if (newMode === 'partial') {
     amount.value = props.minAmount
   }
+  console.log(amount.value)
 })
 
 watch(contributorName, () => {
@@ -65,7 +67,7 @@ function handleSubmit() {
     <h2>Participer à ce cadeau</h2>
     <p>Indiquez aux autres invités votre réservation ou participation et ainsi éviter les doublons.</p>
 
-    <p class="hint" v-if="allowPartial">
+    <p class="hint" v-if="props.gift.allowPartial">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path
           d="M12 21s-7-4.5-9.5-9C1 8 2.5 4.5 6 4c2-.3 3.7.7 4.7 2.2C11.7 5 13.4 4 15.4 4c3.5.5 5 4 3.5 8-2.5 4.5-7 9-7 9z"
