@@ -29,13 +29,11 @@ const displayName = ref(true)
 const nameError = ref(false)
 
 watch(mode, (newMode) => {
-  console.log(amount.value)
   if (newMode === 'full' && hasPrice.value) {
     amount.value = props.remaining
   } else if (newMode === 'partial') {
     amount.value = props.minAmount
   }
-  console.log(amount.value)
 })
 
 watch(contributorName, () => {
